@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React from 'react';
+import Contador from './Contador';
+import Cabecalho from './Cabecalho';
 import './App.css';
+import { createStore } from 'redux'
+import contadorReducer from './reducer/contadorReducer';
+import { Provider } from 'react-redux';
+
+
 
 function App() {
+
+  // redux com react usa context API por baixo dos panos
+  const store = createStore(contadorReducer)
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    {/* preciso passsar minha store como constexto */}
+      <Provider store={store}>
+        <Cabecalho> </Cabecalho>
+        <Contador> </Contador>
+      </Provider>
     </div>
   );
 }
